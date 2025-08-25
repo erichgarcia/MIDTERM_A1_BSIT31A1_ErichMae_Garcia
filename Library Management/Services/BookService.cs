@@ -83,112 +83,156 @@ public class BookService
         // === Extra Books ===
         var extraBooks = new[]
         {
-        new {
-            Author = new Author
-            {
-                Id = Guid.NewGuid(),
-                Name = "Harper Lee",
-                Biography = "American novelist best known for To Kill a Mockingbird.",
-                BirthDate = new DateTime(1926, 4, 28),
-                ProfileImageUrl = "https://example.com/harper.jpg",
-                Books = new List<Book>()
+            new {
+                Author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Harper Lee",
+                    Biography = "American novelist best known for To Kill a Mockingbird.",
+                    BirthDate = new DateTime(1926, 4, 28),
+                    ProfileImageUrl = "https://example.com/harper.jpg",
+                    Books = new List<Book>()
+                },
+                Book = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "To Kill a Mockingbird",
+                    ISBN = "9780061120084",
+                    Description = "A novel about racial injustice in the Deep South.",
+                    Genre = "Classic",
+                    PublishedDate = new DateTime(1960, 7, 11)
+                },
+                Cover = "https://images-na.ssl-images-amazon.com/images/I/81OdwZG5SSL.jpg"
             },
-            Book = new Book
-            {
-                Id = Guid.NewGuid(),
-                Title = "To Kill a Mockingbird",
-                ISBN = "9780061120084",
-                Description = "A novel about racial injustice in the Deep South.",
-                Genre = "Classic",
-                PublishedDate = new DateTime(1960, 7, 11)
+            new {
+                Author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "J.R.R. Tolkien",
+                    Biography = "English writer, poet, philologist, and academic.",
+                    BirthDate = new DateTime(1892, 1, 3),
+                    ProfileImageUrl = "https://example.com/tolkien.jpg",
+                    Books = new List<Book>()
+                },
+                Book = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "The Hobbit",
+                    ISBN = "9780547928227",
+                    Description = "A fantasy novel about Bilbo Baggins' adventure.",
+                    Genre = "Fantasy",
+                    PublishedDate = new DateTime(1937, 9, 21)
+                },
+                Cover = "https://m.media-amazon.com/images/I/81t2CVWEsUL.jpg"
             },
-            Cover = "https://images-na.ssl-images-amazon.com/images/I/81OdwZG5SSL.jpg"
-        },
-        new {
-            Author = new Author
-            {
-                Id = Guid.NewGuid(),
-                Name = "J.R.R. Tolkien",
-                Biography = "English writer, poet, philologist, and academic.",
-                BirthDate = new DateTime(1892, 1, 3),
-                ProfileImageUrl = "https://example.com/tolkien.jpg",
-                Books = new List<Book>()
+            new {
+                Author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "F. Scott Fitzgerald",
+                    Biography = "American novelist and short story writer.",
+                    BirthDate = new DateTime(1896, 9, 24),
+                    ProfileImageUrl = "https://example.com/fitzgerald.jpg",
+                    Books = new List<Book>()
+                },
+                Book = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "The Great Gatsby",
+                    ISBN = "9780743273565",
+                    Description = "A story of the mysterious Jay Gatsby and the American dream.",
+                    Genre = "Classic",
+                    PublishedDate = new DateTime(1925, 4, 10)
+                },
+                Cover = "https://m.media-amazon.com/images/I/81af+MCATTL.jpg"
             },
-            Book = new Book
-            {
-                Id = Guid.NewGuid(),
-                Title = "The Hobbit",
-                ISBN = "9780547928227",
-                Description = "A fantasy novel about Bilbo Baggins' adventure.",
-                Genre = "Fantasy",
-                PublishedDate = new DateTime(1937, 9, 21)
+            new {
+                Author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Suzanne Collins",
+                    Biography = "American television writer and author.",
+                    BirthDate = new DateTime(1962, 8, 10),
+                    ProfileImageUrl = "https://example.com/collins.jpg",
+                    Books = new List<Book>()
+                },
+                Book = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "The Hunger Games",
+                    ISBN = "9780439023481",
+                    Description = "A dystopian novel set in the post-apocalyptic nation of Panem.",
+                    Genre = "Dystopian",
+                    PublishedDate = new DateTime(2008, 9, 14)
+                },
+                Cover = "https://m.media-amazon.com/images/I/61JfGcL2ljL.jpg"
             },
-            Cover = "https://m.media-amazon.com/images/I/81t2CVWEsUL.jpg"
-        },
-        new {
-            Author = new Author
-            {
-                Id = Guid.NewGuid(),
-                Name = "F. Scott Fitzgerald",
-                Biography = "American novelist and short story writer.",
-                BirthDate = new DateTime(1896, 9, 24),
-                ProfileImageUrl = "https://example.com/fitzgerald.jpg",
-                Books = new List<Book>()
+            new {
+                Author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Mary Shelley",
+                    Biography = "English novelist best known for Frankenstein.",
+                    BirthDate = new DateTime(1797, 8, 30),
+                    ProfileImageUrl = "https://example.com/shelley.jpg",
+                    Books = new List<Book>()
+                },
+                Book = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Frankenstein",
+                    ISBN = "9780486282114",
+                    Description = "A gothic novel about Victor Frankenstein and his creation.",
+                    Genre = "Horror",
+                    PublishedDate = new DateTime(1818, 1, 1)
+                },
+                Cover = "https://m.media-amazon.com/images/I/81Fhc2wAE0L.jpg"
             },
-            Book = new Book
-            {
-                Id = Guid.NewGuid(),
-                Title = "The Great Gatsby",
-                ISBN = "9780743273565",
-                Description = "A story of the mysterious Jay Gatsby and the American dream.",
-                Genre = "Classic",
-                PublishedDate = new DateTime(1925, 4, 10)
+            // NEW BOOK 1
+            new {
+                Author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Jane Austen",
+                    Biography = "English novelist known primarily for her six major novels.",
+                    BirthDate = new DateTime(1775, 12, 16),
+                    ProfileImageUrl = "https://example.com/austen.jpg",
+                    Books = new List<Book>()
+                },
+                Book = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Pride and Prejudice",
+                    ISBN = "9781503290563",
+                    Description = "A romantic novel of manners that depicts issues of class, marriage, and morality.",
+                    Genre = "Romance",
+                    PublishedDate = new DateTime(1813, 1, 28)
+                },
+                Cover = "https://m.media-amazon.com/images/I/81OthjkJBuL.jpg"
             },
-            Cover = "https://m.media-amazon.com/images/I/81af+MCATTL.jpg"
-        },
-        new {
-            Author = new Author
-            {
-                Id = Guid.NewGuid(),
-                Name = "Suzanne Collins",
-                Biography = "American television writer and author.",
-                BirthDate = new DateTime(1962, 8, 10),
-                ProfileImageUrl = "https://example.com/collins.jpg",
-                Books = new List<Book>()
-            },
-            Book = new Book
-            {
-                Id = Guid.NewGuid(),
-                Title = "The Hunger Games",
-                ISBN = "9780439023481",
-                Description = "A dystopian novel set in the post-apocalyptic nation of Panem.",
-                Genre = "Dystopian",
-                PublishedDate = new DateTime(2008, 9, 14)
-            },
-            Cover = "https://m.media-amazon.com/images/I/61JfGcL2ljL.jpg"
-        },
-        new {
-            Author = new Author
-            {
-                Id = Guid.NewGuid(),
-                Name = "Mary Shelley",
-                Biography = "English novelist best known for Frankenstein.",
-                BirthDate = new DateTime(1797, 8, 30),
-                ProfileImageUrl = "https://example.com/shelley.jpg",
-                Books = new List<Book>()
-            },
-            Book = new Book
-            {
-                Id = Guid.NewGuid(),
-                Title = "Frankenstein",
-                ISBN = "9780486282114",
-                Description = "A gothic novel about Victor Frankenstein and his creation.",
-                Genre = "Horror",
-                PublishedDate = new DateTime(1818, 1, 1)
-            },
-            Cover = "https://m.media-amazon.com/images/I/81Fhc2wAE0L.jpg"
-        }
-    };
+            // NEW BOOK 2
+            new {
+                Author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Herman Melville",
+                    Biography = "American novelist, short story writer, and poet of the American Renaissance period.",
+                    BirthDate = new DateTime(1819, 8, 1),
+                    ProfileImageUrl = "https://example.com/melville.jpg",
+                    Books = new List<Book>()
+                },
+                Book = new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Moby-Dick",
+                    ISBN = "9781503280786",
+                    Description = "The narrative of Captain Ahab's obsessive quest to kill the white whale, Moby Dick.",
+                    Genre = "Adventure",
+                    PublishedDate = new DateTime(1851, 10, 18)
+                },
+                Cover = "https://m.media-amazon.com/images/I/81PRVYvXfNL.jpg"
+            }
+        };
 
         // Add extras to collections
         _authors.Add(author1);
@@ -198,6 +242,7 @@ public class BookService
         _bookCopies.Add(bookItem1);
         _bookCopies.Add(bookItem2);
 
+        var rng = new Random();
         foreach (var entry in extraBooks)
         {
             entry.Author.Books.Add(entry.Book);
@@ -209,12 +254,11 @@ public class BookService
                 CoverImageUrl = entry.Cover,
                 Condition = "New",
                 Source = "Purchase",
-                AddedDate = DateTime.Now.AddDays(-new Random().Next(1, 365)),
+                AddedDate = DateTime.Now.AddDays(-rng.Next(1, 365)),
                 Book = entry.Book
             });
         }
     }
-
 
     public void AddBook(AddBookViewModel book)
     {
@@ -234,7 +278,8 @@ public class BookService
         {
             Id = Guid.NewGuid(),
             Name = book.Author,
-            ProfileImageUrl = book.AuthorProfileImageUrl
+            ProfileImageUrl = book.AuthorProfileImageUrl,
+            Books = new List<Book> { newBook }
         };
         _authors.Add(newAuthor);
 
@@ -281,7 +326,8 @@ public class BookService
             PublishedDate = bookViewModel.PublishedDate,
             AuthorId = _authors.FirstOrDefault(a => a.Name == bookViewModel.AuthorName)?.Id,
             Author = bookViewModel.AuthorName,
-            AuthorProfileImageUrl = bookViewModel.AuthorProfileImageUrl
+            AuthorProfileImageUrl = bookViewModel.AuthorProfileImageUrl,
+            CoverImageUrl = bookViewModel.CoverImageUrl,
         };
 
         return editBookViewModel ?? throw new KeyNotFoundException("Book not found");
@@ -305,7 +351,8 @@ public class BookService
             {
                 Id = Guid.NewGuid(),
                 Name = vm.Author,
-                ProfileImageUrl = vm.AuthorProfileImageUrl
+                ProfileImageUrl = vm.AuthorProfileImageUrl,
+                Books = new List<Book> { book }
             };
             _authors.Add(author);
         }
@@ -314,19 +361,68 @@ public class BookService
             author.Name = vm.Author;
             author.ProfileImageUrl = vm.AuthorProfileImageUrl;
         }
+
+        var bookCopy = _bookCopies.FirstOrDefault(bi => bi.Book.Id == vm.BookId);
+        if (bookCopy != null)
+        {
+            bookCopy.CoverImageUrl = vm.CoverImageUrl;
+        }
+        else
+        {
+            bookCopy = new BookCopy
+            {
+                Id = Guid.NewGuid(),
+                CoverImageUrl = vm.CoverImageUrl,
+                AddedDate = DateTime.Now,
+                Book = book
+            };
+            _bookCopies.Add(bookCopy);
+        }
     }
 
-    // Singleton pattern
-    private static BookService? _instance;
-    public static BookService Instance
+    public void DeleteBook(Guid id)
     {
-        get
+        var book = _books.FirstOrDefault(b => b.Id == id) ?? throw new KeyNotFoundException("Book not found");
+        _books.Remove(book);
+        var author = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == id));
+        if (author != null)
         {
-            if (_instance == null)
+            author.Books.Remove(book);
+            if (!author.Books.Any())
             {
-                _instance = new BookService();
+                _authors.Remove(author);
             }
-            return _instance;
+        }
+        var bookCopies = _bookCopies.Where(bi => bi.Book.Id == id).ToList();
+        foreach (var bookCopy in bookCopies)
+        {
+            _bookCopies.Remove(bookCopy);
+        }
+    }
+
+    // Thread-safe Singleton pattern
+    private static readonly Lazy<BookService> _instance = new(() => new BookService());
+    public static BookService Instance => _instance.Value;
+
+    public void AddCopies(Guid bookId, int numberOfCopies)
+    {
+        var book = _books.FirstOrDefault(b => b.Id == bookId);
+        if (book == null)
+        {
+            throw new KeyNotFoundException("Book not found");
+        }
+
+        for (int i = 0; i < numberOfCopies; i++)
+        {
+            var newCopy = new BookCopy
+            {
+                Id = Guid.NewGuid(),
+                Condition = "New",
+                Source = "Purchase",
+                AddedDate = DateTime.Now,
+                Book = book
+            };
+            _bookCopies.Add(newCopy);
         }
     }
 }
