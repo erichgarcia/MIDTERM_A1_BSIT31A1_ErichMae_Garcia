@@ -304,6 +304,7 @@ public class BookService
             ISBN = b.ISBN,
             Description = b.Description,
             Genre = b.Genre,
+            
             PublishedDate = b.PublishedDate,
             CoverImageUrl = _bookCopies.FirstOrDefault(bi => bi.Book.Id == b.Id)?.CoverImageUrl,
             AuthorId = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == b.Id))?.Id,
@@ -347,6 +348,7 @@ public class BookService
         book.Description = vm.Description;
         book.Genre = vm.Genre;
         book.PublishedDate = vm.PublishedDate;
+        
 
         var author = _authors.FirstOrDefault(a => a.Id == vm.AuthorId);
         if (author == null)

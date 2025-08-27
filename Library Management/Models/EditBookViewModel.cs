@@ -42,6 +42,5 @@ namespace Library_Management.Models
 
         [Display(Name = "Add More Copies")]
         public int NewCopies { get; set; }
-
     }
 }

@@ -96,21 +96,39 @@
         }
 
         function openAddModal() {
-                    fetch(`/Book/AddModal`)
-                        .then(response => {
-                            if (!response.ok) throw new Error('Error loading edit form.');
-                            return response.text();
-                        })
-                        .then(html => {
-                            document.querySelector('#exampleModal .modal-content').innerHTML = html;
-                            let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-                            modal.show();
-                        })
-                        .catch(error => {
-                            alert(error.message);
-                            console.error(error);
-                        });
-                }
+            fetch(`/Book/AddModal`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Error loading edit form.');
+                    return response.text();
+                })
+                .then(html => {
+                    document.querySelector('#exampleModal .modal-content').innerHTML = html;
+                    let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                    modal.show();
+                })
+                .catch(error => {
+                    alert(error.message);
+                    console.error(error);
+                });
+        }
+
+        function openDeleteModal(url, title) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Error loading delete form.');
+                    return response.text();
+                })
+                .then(html => {
+                    document.querySelector('#exampleModal .modal-content').innerHTML = html;
+                    document.querySelector('#exampleModalLabel').textContent = title;
+                    let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                    modal.show();
+                })
+                .catch(error => {
+                    alert('Error loading details.');
+                    console.error(error);
+                });
+        }
 
         document.addEventListener("submit", function (e) {
             const form = e.target;
