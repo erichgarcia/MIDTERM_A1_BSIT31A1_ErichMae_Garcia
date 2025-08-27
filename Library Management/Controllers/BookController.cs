@@ -58,7 +58,8 @@ namespace Library_Management.Controllers
             var vm = new DeleteBookViewModel
             {
                 BookId = book.BookId,
-
+                Title = book.Title ?? "Unknown",
+                AuthorName = book.Author ?? "Unknown"
             };
 
             return PartialView("_DeleteBookPartial", vm);
@@ -72,12 +73,6 @@ namespace Library_Management.Controllers
 
             BookService.Instance.DeleteBook(id);
             return Ok();
-        }
-
-        public IActionResult DeleteModal(Guid id)
-        {
-            
-            return PartialView("_DeletePartial");
         }
 
         [HttpDelete]
