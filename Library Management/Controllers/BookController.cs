@@ -58,8 +58,7 @@ namespace Library_Management.Controllers
             var vm = new DeleteBookViewModel
             {
                 BookId = book.BookId,
-                Title = book.Title,
-                //AuthorName = book.AuthorName
+
             };
 
             return PartialView("_DeleteBookPartial", vm);

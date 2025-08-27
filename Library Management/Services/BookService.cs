@@ -297,7 +297,7 @@ public class BookService
 
     public IEnumerable<BookListViewModel> GetBooks()
     {
-        return _books.Select(b => new BookListViewModel
+        return _books.Where(b => !b.IsArchived).Select(b => new BookListViewModel
         {
             BookId = b.Id,
             Title = b.Title,
@@ -306,10 +306,14 @@ public class BookService
             Genre = b.Genre,
             PublishedDate = b.PublishedDate,
             CoverImageUrl = _bookCopies.FirstOrDefault(bi => bi.Book.Id == b.Id)?.CoverImageUrl,
+            AuthorId = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == b.Id))?.Id,
             AuthorName = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == b.Id))?.Name,
             AuthorProfileImageUrl = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == b.Id))?.ProfileImageUrl,
             TotalCopies = _bookCopies.Count(bi => bi.Book.Id == b.Id),
-            AvailableCopies = _bookCopies.Count(bi => bi.Book.Id == b.Id && bi.PulloutDate == null)
+            AvailableCopies = _bookCopies.Count(bi => bi.Book.Id == b.Id && bi.PulloutDate == null && bi.IsAvailable),
+            PulledOutCopies = _bookCopies.Count(bi => bi.Book.Id == b.Id && bi.PulloutDate != null),
+            IsArchived = b.IsArchived,
+            ArchivedDate = b.ArchivedDate
         });
     }
 
@@ -400,7 +404,6 @@ public class BookService
         }
     }
 
-    // Thread-safe Singleton pattern
     private static readonly Lazy<BookService> _instance = new(() => new BookService());
     public static BookService Instance => _instance.Value;
 
@@ -424,5 +427,117 @@ public class BookService
             };
             _bookCopies.Add(newCopy);
         }
+    }
+
+    public IEnumerable<Author> GetAllAuthors()
+    {
+        return _authors;
+    }
+
+    public void AddAuthor(Author author)
+    {
+        ArgumentNullException.ThrowIfNull(author, nameof(author));
+        _authors.Add(author);
+    }
+
+    public void UpdateAuthor(Library_Management.Models.EditAuthorViewModel viewModel)
+    {
+        ArgumentNullException.ThrowIfNull(viewModel, nameof(viewModel));
+        
+        var author = _authors.FirstOrDefault(a => a.Id == viewModel.AuthorId);
+        if (author == null) throw new KeyNotFoundException("Author not found");
+        
+        author.Name = viewModel.Name;
+        author.Biography = viewModel.Biography;
+        author.BirthDate = viewModel.BirthDate;
+        author.ProfileImageUrl = viewModel.ProfileImageUrl;
+        author.IsArchived = viewModel.IsArchived;
+    }
+
+    public void ArchiveAuthor(Guid id)
+    {
+        var author = _authors.FirstOrDefault(a => a.Id == id);
+        if (author == null) throw new KeyNotFoundException("Author not found");
+        
+        author.IsArchived = true;
+        author.ArchivedDate = DateTime.Now;
+   
+        foreach (var book in author.Books)
+        {
+            book.IsArchived = true;
+            book.ArchivedDate = DateTime.Now;
+        }
+    }
+
+    public void RestoreAuthor(Guid id)
+    {
+        var author = _authors.FirstOrDefault(a => a.Id == id);
+        if (author == null) throw new KeyNotFoundException("Author not found");
+        
+        author.IsArchived = false;
+        author.ArchivedDate = null;
+      
+    }
+
+    public void ArchiveBook(Guid id)
+    {
+        var book = _books.FirstOrDefault(b => b.Id == id);
+        if (book == null) throw new KeyNotFoundException("Book not found");
+        
+        book.IsArchived = true;
+        book.ArchivedDate = DateTime.Now;
+    }
+
+    public void RestoreBook(Guid id)
+    {
+        var book = _books.FirstOrDefault(b => b.Id == id);
+        if (book == null) throw new KeyNotFoundException("Book not found");
+        
+        book.IsArchived = false;
+        book.ArchivedDate = null;
+    }
+
+    public IEnumerable<BookListViewModel> GetArchivedBooks()
+    {
+        return _books.Where(b => b.IsArchived).Select(b => new BookListViewModel
+        {
+            BookId = b.Id,
+            Title = b.Title,
+            ISBN = b.ISBN,
+            Description = b.Description,
+            Genre = b.Genre,
+            PublishedDate = b.PublishedDate,
+            CoverImageUrl = _bookCopies.FirstOrDefault(bi => bi.Book.Id == b.Id)?.CoverImageUrl,
+            AuthorId = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == b.Id))?.Id,
+            AuthorName = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == b.Id))?.Name,
+            AuthorProfileImageUrl = _authors.FirstOrDefault(a => a.Books.Any(bk => bk.Id == b.Id))?.ProfileImageUrl,
+            TotalCopies = _bookCopies.Count(bi => bi.Book.Id == b.Id),
+            AvailableCopies = _bookCopies.Count(bi => bi.Book.Id == b.Id && bi.PulloutDate == null && bi.IsAvailable),
+            PulledOutCopies = _bookCopies.Count(bi => bi.Book.Id == b.Id && bi.PulloutDate != null),
+            IsArchived = b.IsArchived,
+            ArchivedDate = b.ArchivedDate
+        });
+    }
+
+    public IEnumerable<BookCopy> GetBookCopies(Guid bookId)
+    {
+        return _bookCopies.Where(bc => bc.Book.Id == bookId);
+    }
+
+    public void PulloutBookCopy(Guid bookCopyId, string reason)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(reason, nameof(reason));
+        
+        var bookCopy = _bookCopies.FirstOrDefault(bc => bc.Id == bookCopyId);
+        if (bookCopy == null) throw new KeyNotFoundException("Book copy not found");
+        
+        bookCopy.PulloutDate = DateTime.Now;
+        bookCopy.PulloutReason = reason;
+        bookCopy.IsAvailable = false;
+    }
+
+    public BookCopy? GetBookCopyById(Guid bookCopyId)
+    {
+        return _bookCopies.FirstOrDefault(bc => bc.Id == bookCopyId);
     }
 }
